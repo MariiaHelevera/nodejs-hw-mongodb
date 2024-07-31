@@ -7,23 +7,20 @@ export const getAllContacts = async ({
     perPage = 10,
     sortOrder = SORT_ORDER.ASC,
     sortBy = '_id',
-    type,
+    contactType,
     isFavourite,
 }) => {
     const limit = perPage;
     const skip = (page - 1) * perPage;
 
-    const contactsQuery = ContactsCollection.find();
-    // const contactsCount = await ContactsCollection.find().merge(contactsQuery).countDocuments();
+    let contactsQuery = ContactsCollection.find();
 
-    // const contacts = await contactsQuery.skip(skip).limit(limit).sort({ [sortBy]: sortOrder }).exec();
-
-    if (type) {
-        contactsQuery.where('contactType').equals(type);
+    if (contactType) {
+        contactsQuery = contactsQuery.where('contactType').equals(contactType);
     }
 
-    if (isFavourite) {
-        contactsQuery.where('isFavourite').equals(isFavourite);
+    if (isFavourite !== undefined) {
+        contactsQuery = contactsQuery.where('isFavourite').equals(isFavourite);
     }
 
     const [contactsCount, contacts] = await Promise.all([

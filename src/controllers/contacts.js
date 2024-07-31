@@ -9,14 +9,14 @@ export const getContactsController = async (req, res, next) => {
     try {
         const { page, perPage } = parsePaginationParams(req.query);
         const { sortBy, sortOrder } = parseSortParams(req.query);
-        const { type, isFavourite } = parseFilterParams(req.query);
+        const { contactType, isFavourite } = parseFilterParams(req.query);
 
         const contacts = await getAllContacts({
             page,
             perPage,
             sortBy,
             sortOrder,
-            type,
+            contactType,
             isFavourite,
         });
 
