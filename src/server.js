@@ -2,7 +2,7 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import { env } from './utils/env.js';
-import contactRoutes from './routers/contacts.js';
+import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
@@ -22,10 +22,10 @@ export const setupServer = () => {
     app.use(express.json({
         type: ['application/json', 'application/vnd.api+json'],
         limit: '100kb',
-    }));    
+    }));
     app.use(cors());
 
-    app.use(contactRoutes);
+    app.use(router);
 
     app.use('*', notFoundHandler);
 
