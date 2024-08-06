@@ -1,6 +1,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { env } from './utils/env.js';
 import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -24,6 +25,7 @@ export const setupServer = () => {
         limit: '100kb',
     }));
     app.use(cors());
+    app.use(cookieParser());
 
     app.use(router);
 
