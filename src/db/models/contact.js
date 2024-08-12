@@ -24,8 +24,13 @@ export const ContactSchema = new Schema(
             enum: ['work', 'home', 'personal'],
             default: 'personal',
         },
-        userId: { type: Schema.Types.ObjectId, ref: 'users' },
-        photo: { type: String },
+        userId: {
+            type: Schema.Types.ObjectId,
+            ref: 'users'
+        },
+        photo: {
+            type: String,
+        },
     },
     {
     timestamps: true,

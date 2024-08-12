@@ -54,9 +54,9 @@ export const createContactController = async (req, res) => {
     const {
     body,
     user: { _id: userId },
-    photo,
     } = req;
 
+    const photo = req.file;
     let photoUrl;
 
     if (photo) {
