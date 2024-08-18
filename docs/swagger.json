@@ -200,7 +200,8 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "phoneNumber"
+                  "phoneNumber",
+                  "contactType"
                 ],
                 "properties": {
                   "name": {
@@ -212,6 +213,33 @@
                     "description": "Contact's phone number",
                     "type": "string",
                     "example": "+380000000003"
+                  },
+                  "email": {
+                    "description": "Contact's email",
+                    "type": "string",
+                    "example": "milana@example.com"
+                  },
+                  "isFavourite": {
+                    "description": "Shows if the contact is marked as favorite",
+                    "type": "boolean",
+                    "default": false,
+                    "example": false
+                  },
+                  "contactType": {
+                    "description": "Contact's type",
+                    "type": "string",
+                    "enum": [
+                      "work",
+                      "home",
+                      "personal"
+                    ],
+                    "default": "personal",
+                    "example": "personal"
+                  },
+                  "photo": {
+                    "description": "Contact's photo",
+                    "type": "string",
+                    "format": "binary"
                   }
                 }
               }
@@ -320,7 +348,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Update contact by id",
+        "summary": "Update contact by ID",
         "operationId": "updateContactById",
         "description": "Update contact by providing a contact's ID",
         "security": [
@@ -333,6 +361,7 @@
             "in": "path",
             "name": "contactId",
             "required": true,
+            "description": "ID of the contact to update",
             "schema": {
               "type": "string",
               "example": "66785ee7009eeec396e0e546"
@@ -345,11 +374,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "_id": {
-                    "description": "Contact's id",
-                    "type": "string",
-                    "example": "66785ee7009eeec396e0e546"
-                  },
                   "name": {
                     "description": "Contact's name",
                     "type": "string",
@@ -359,11 +383,6 @@
                     "description": "Contact's phone number",
                     "type": "string",
                     "example": "+380000000003"
-                  },
-                  "userId": {
-                    "description": "The ID of the user who created this contact",
-                    "type": "string",
-                    "example": "667814c7c6397783a1a5ea1d"
                   },
                   "email": {
                     "description": "Contact's email",
@@ -385,7 +404,7 @@
                     "default": "false"
                   },
                   "contactType": {
-                    "description": "Contact type",
+                    "description": "Contact's type",
                     "type": "string",
                     "enum": [
                       "work",
@@ -395,8 +414,9 @@
                     "default": "personal"
                   },
                   "photo": {
-                    "description": "Link to contact's photo",
+                    "description": "Contact's photo",
                     "type": "string",
+                    "format": "binary",
                     "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
                   }
                 }
